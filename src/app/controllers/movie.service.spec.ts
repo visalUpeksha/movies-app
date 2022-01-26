@@ -1,32 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Movie } from '../models/movie';
-import { HttpHeaders } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 
-export type ApiResponse = {
-  Response: string;
-  Search: Movie[];
-  totalResults: string;
-};
+import { MovieService } from './movie.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa('admin:movieApi@321')
-  })
-};
+describe('MovieService', () => {
+  let service: MovieService;
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MovieService {
-  apiURL: string = 'http://www.omdbapi.com/?apikey={key}';
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(MovieService);
+  });
 
-  
-  constructor(private httpClient: HttpClient) {
-  }
-
-  searchMovie(name: string) {
-    return this.httpClient.get<any>(`${this.apiURL}&s=${name}`,httpOptions);
-  }
-}
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
